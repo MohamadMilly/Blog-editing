@@ -1,17 +1,15 @@
-import "./App.css";
+import { Outlet } from "react-router";
 import { Navbar } from "./components/Navbar";
 import { SearchBar } from "./components/searchBar";
 
 function App() {
   return (
-    <main>
+    <>
       <header>
         <Navbar />
-        <SearchBar />
       </header>
-
-      <h1>Welcome to Dashboard</h1>
-    </main>
+      <Outlet />
+    </>
   );
 }
 

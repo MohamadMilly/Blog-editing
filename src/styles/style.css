@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@layer base {
+  :root {
+    --animate-dropdown: dropdown 0.3s forwards;
+    --animate-slideup: slideup 0.3s forwards;
+  }
+}
+
+@layer components {
+  .animate-dropdown {
+    animation: var(--animate-dropdown);
+    transform-origin: top;
+  }
+  .animate-slideup {
+    animation: var(--animate-slideup);
+    transform-origin: top;
+  }
+}
+
+@keyframes dropdown {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideup {
+  from {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  to {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+}

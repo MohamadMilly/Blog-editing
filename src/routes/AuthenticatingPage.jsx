@@ -8,8 +8,8 @@ export function AuthenticatingPage() {
   const [isLoading, setIsloading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { login } = useAuth();
-
+  const { login, token } = useAuth();
+  
   const navigate = useNavigate();
 
   // extracting the temporary token from the URL
@@ -19,6 +19,9 @@ export function AuthenticatingPage() {
 
   useEffect(() => {
     const validateToken = async () => {
+      if (token) {
+        return navigate("/dashboard");
+      }
       try {
         setIsloading(true);
         setError(null);
@@ -50,7 +53,7 @@ export function AuthenticatingPage() {
       }
     };
     validateToken();
-  }, [tempToken, login, navigate]);
+  }, [tempToken, login, navigate, token]);
   if (isLoading) {
     return <p>Authenticating...</p>;
   }
