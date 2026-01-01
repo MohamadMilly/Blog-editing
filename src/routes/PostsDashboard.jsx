@@ -1,6 +1,6 @@
 import { useMyPosts } from "../contexts/myPostsContext";
 import { PostPreviewCard } from "../components/PostPreviewCard";
-import { SearchBar } from "../components/searchBar";
+import { SearchBar } from "../components/SearchBar";
 export function PostsDashboard() {
   const { isLoading, error, visiblePosts } = useMyPosts();
   if (error) return <p>Error: {error}</p>;
