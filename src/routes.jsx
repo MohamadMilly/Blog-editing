@@ -1,6 +1,6 @@
 import App from "./App";
 import { AuthenticatingPage } from "./routes/AuthenticatingPage";
-import { NewPostPage } from "./routes/newPostPage";
+import { NewPostPage } from "./routes/NewPostPage";
 import { PostsDashboard } from "./routes/PostsDashboard";
 const routes = [
   {
