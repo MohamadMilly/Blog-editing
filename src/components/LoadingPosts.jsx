@@ -6,7 +6,7 @@ export function LoadingPosts() {
         <aside className="grow px-4 py-3 basis-xs relative">
           <h2 className="text-lg font-medium mb-1 p-4 bg-gray-600/10 animate-pulse rounded"></h2>
           <div>
-            <span className="w-20 py-1 bg-gray-600/10 rounded animate-pulse"></span>
+            <span className="w-20 py-2 bg-gray-600/10 rounded animate-pulse block"></span>
           </div>
           <div className="text-sm mt-2 flex items-center gap-x-6 text-gray-400 flex-wrap">
             <div className="bg-gray-600/10 w-20 py-1 animate-pulse rounded"></div>
