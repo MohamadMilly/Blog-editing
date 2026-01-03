@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useAuth } from "../contexts/authContext";
+import Spinner from "../components/Spinner";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -9,7 +10,7 @@ export function AuthenticatingPage() {
   const [error, setError] = useState(null);
 
   const { login, token } = useAuth();
-  
+
   const navigate = useNavigate();
 
   // extracting the temporary token from the URL
@@ -46,7 +47,7 @@ export function AuthenticatingPage() {
         login(token, user);
         navigate("/dashboard");
       } catch (err) {
-        setError(err.message);
+        navigate("/unauthorized");
         console.error(err);
       } finally {
         setIsloading(false);
@@ -55,9 +56,13 @@ export function AuthenticatingPage() {
     validateToken();
   }, [tempToken, login, navigate, token]);
   if (isLoading) {
-    return <p>Authenticating...</p>;
-  }
-  if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <main className="grid min-h-full place-items-center bg-slate-950 px-6 py-24 sm:py-32 lg:px-8 text-gray-200">
+        <div className="flex flex-col gap-2">
+          <Spinner />
+          <span>Authorizing...</span>
+        </div>
+      </main>
+    );
   }
 }

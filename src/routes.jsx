@@ -2,14 +2,21 @@ import App from "./App";
 import { AuthenticatingPage } from "./routes/AuthenticatingPage";
 import { NewPostPage } from "./routes/NewPostPage";
 import { PostsDashboard } from "./routes/PostsDashboard";
+import { ProtectedRoute } from "./routes/ProtectedRoute";
+import { UnAuthorizedPage } from "./routes/UnAuthorizedPage";
 const routes = [
   {
     index: true,
     element: <AuthenticatingPage />,
+    errorElement: <UnAuthorizedPage />,
   },
   {
     path: "/dashboard",
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
@@ -20,6 +27,10 @@ const routes = [
         element: <NewPostPage />,
       },
     ],
+  },
+  {
+    path: "/unauthorized",
+    element: <UnAuthorizedPage />,
   },
 ];
 
