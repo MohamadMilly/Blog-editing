@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { useMyPosts } from "../contexts/myPostsContext";
+import { sortPosts } from "../utlis/sortPosts";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -30,9 +31,7 @@ export function usePublish() {
         );
       }
       // sadly i couldn't sort this in backend by orderBy
-      const sortedPosts = result.posts.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
+      const sortedPosts = sortPosts(result.posts, "createdAt");
       setPosts(sortedPosts);
     } catch (err) {
       setError(err.message);

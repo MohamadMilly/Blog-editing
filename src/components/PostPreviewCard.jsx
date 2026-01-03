@@ -27,12 +27,12 @@ export function PostPreviewCard({
             alt="post feature image"
           />
         ) : (
-          <ImageIcon className="" size={32} />
+          <ImageIcon size={32} />
         )}
       </div>
       <aside className="grow px-4 py-3 basis-xs relative">
         <div className="absolute top-2 right-4 flex items-center gap-x-2">
-          <PostDropDownMenu />
+          <PostDropDownMenu slug={slug} />
           {published && (
             <a
               className=" hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"

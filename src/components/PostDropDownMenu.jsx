@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Ellipsis, X } from "lucide-react";
 import { EventButton } from "./EventButton";
 import { Pen, Trash } from "lucide-react";
+import { DeletePostButton } from "./DeletePostButton";
 export function PostDropDownMenu({ slug, className }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -20,10 +21,7 @@ export function PostDropDownMenu({ slug, className }) {
             <Pen size={15} />
             <span>Edit</span>
           </button>
-          <button className="flex items-center gap-x-2 cursor-pointer text-sm w-full text-start p-1 rounded-b hover:bg-slate-600/10">
-            <Trash size={15} />
-            <span>Delete</span>
-          </button>
+          <DeletePostButton slug={slug} />
         </div>
       )}
     </div>

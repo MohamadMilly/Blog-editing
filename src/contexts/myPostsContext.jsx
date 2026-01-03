@@ -52,6 +52,7 @@ export function MyPostsProvider({ children }) {
         searchPosts,
         setIsSearching,
         setPosts,
+        posts: posts,
       }}
     >
       {children}
