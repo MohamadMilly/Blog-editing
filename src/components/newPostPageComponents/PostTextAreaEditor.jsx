@@ -47,7 +47,6 @@ export default function PostTextAreaEditor({ onWrite, content }) {
             { title: "English", code: "en" },
             { title: "Arabic", code: "ar" },
           ],
-          language: "ar",
           toolbar:
             "ltr rlf" +
             "undo redo | blocks | " +
