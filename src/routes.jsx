@@ -8,7 +8,6 @@ const routes = [
   {
     index: true,
     element: <AuthenticatingPage />,
-    errorElement: <UnAuthorizedPage />,
   },
   {
     path: "/dashboard",

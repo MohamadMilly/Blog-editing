@@ -7,7 +7,6 @@ export default function PostTextAreaEditor({ onWrite, content }) {
   const editorRef = useRef(null);
   const log = () => {
     if (editorRef.current) {
-      console.log(editorRef.current.getContent());
       onWrite(editorRef.current.getContent());
     }
   };
@@ -42,14 +41,21 @@ export default function PostTextAreaEditor({ onWrite, content }) {
             "code",
             "help",
             "wordcount",
+            "directionality",
           ],
+          content_langs: [
+            { title: "English", code: "en" },
+            { title: "Arabic", code: "ar" },
+          ],
+          language: "ar",
           toolbar:
+            "ltr rlf" +
             "undo redo | blocks | " +
             "bold italic forecolor | alignleft aligncenter " +
             "alignright alignjustify | bullist numlist outdent indent | " +
             "removeformat | help",
           content_style:
-            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px;background-color:#0f172a;color:#e5e7eb; }",
+            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px;background-color:#0f172a;color:#e5e7eb; direction:auto; }",
         }}
       />
     </>
