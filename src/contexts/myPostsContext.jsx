@@ -14,7 +14,10 @@ export function MyPostsProvider({ children }) {
   const API_URL = import.meta.env.VITE_API_URL;
   useEffect(() => {
     const getPosts = async () => {
+      if (!token) return null;
       try {
+        setIsLoading(true);
+        setError(null);
         const response = await fetch(`${API_URL}/users/me/posts`, {
           method: "GET",
           headers: {
