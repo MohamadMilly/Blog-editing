@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { EllipsisVertical, X, SearchCheck, SearchSlash } from "lucide-react";
+import { EllipsisVertical, X } from "lucide-react";
 import { PostsControl } from "./PostsControl";
+import { LogoutButton } from "./LogoutButton";
+import { SettingsSection } from "./Settings";
 export function Toolbar() {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleOpen = () => {
@@ -16,10 +18,11 @@ export function Toolbar() {
       </button>
       {isOpen && (
         <div
-          className="absolute top-full w-40 px-2 mt-2 right-0 bg-slate-900/95 backdrop-blur-2xl rounded-md
+          className="absolute top-full w-50 px-2 py-2 mt-2 right-0 bg-slate-800 backdrop-blur-2xl rounded-md
         "
         >
           <PostsControl />
+          <SettingsSection />
         </div>
       )}
     </aside>

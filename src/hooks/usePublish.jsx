@@ -6,12 +6,12 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export function usePublish() {
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState(false);
   const { token } = useAuth();
   const { setPosts } = useMyPosts();
-  const toggleAll = async (status) => {
+  const toggleAll = async (publish) => {
     try {
-      setIsLoading(true);
+      setStatus(publish ? "publishing" : "unpublishing");
       setError(null);
       const response = await fetch(`${API_URL}/posts`, {
         method: "PATCH",
@@ -20,13 +20,13 @@ export function usePublish() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          publish: status,
+          publish: publish,
         }),
       });
       const result = await response.json();
       if (!response.ok) {
         throw new Error(
-          result.message || `Failed to ${status ? "publish" : "unpublish"}.`
+          result.message || `Failed to ${publish ? "publish" : "unpublish"}.`
         );
       }
       // sadly i couldn't sort this in backend by orderBy
@@ -39,8 +39,8 @@ export function usePublish() {
       console.error(err.message);
       alert(err.message);
     } finally {
-      setIsLoading(false);
+      setStatus(null);
     }
   };
-  return { isLoading, error, toggleAll };
+  return { status, error, toggleAll };
 }

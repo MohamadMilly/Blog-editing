@@ -1,5 +1,6 @@
 import { timeAgo } from "../utlis/dateUtils";
 import { ArrowUpRight, ImageIcon } from "lucide-react";
+import { PostDropDownMenu } from "./PostDropDownMenu";
 export function PostPreviewCard({
   title,
   updatedAt = null,
@@ -17,7 +18,7 @@ export function PostPreviewCard({
   const updatedAtDateString = timeAgo(updatedAtDate);
   const createdAtDateString = timeAgo(createdAtDate);
   return (
-    <article className="flex flex-wrap rounded-2xl min-37.5 overflow-hidden bg-slate-900/70 backdrop-blur-2xl relative">
+    <article className="relative flex flex-wrap rounded-2xl min-37.5 overflow-hidden bg-slate-900/70 backdrop-blur-2xl">
       <div className="w-full h-60 sm:w-37.5 sm:h-37.5 shrink-0 flex justify-center items-center bg-gray-800/10">
         {featuredImageURL ? (
           <img
@@ -30,14 +31,18 @@ export function PostPreviewCard({
         )}
       </div>
       <aside className="grow px-4 py-3 basis-xs relative">
-        {published && (
-          <a
-            className="absolute top-4 right-4 hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
-            href={`https://blog-consumption.vercel.app/posts/${slug}`}
-          >
-            <ArrowUpRight size={24} />
-          </a>
-        )}
+        <div className="absolute top-2 right-4 flex items-center gap-x-2">
+          <PostDropDownMenu />
+          {published && (
+            <a
+              className=" hover:translate-x-1 hover:-translate-y-1 transition-all duration-300"
+              href={`https://blog-consumption.vercel.app/posts/${slug}`}
+            >
+              <ArrowUpRight size={24} />
+            </a>
+          )}
+        </div>
+
         <h2 className="text-lg font-medium mb-1">{title}</h2>
         <div>
           <span
