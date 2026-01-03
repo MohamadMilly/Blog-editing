@@ -13,7 +13,6 @@ export default function PostTextAreaEditor({ onWrite, content }) {
   return (
     <>
       <Editor
-        className="bg-amber-700"
         apiKey={TINYMCE_API_KEY}
         onInit={(_evt, editor) => (editorRef.current = editor)}
         initialValue="<p>Write the content here ...</p>"
@@ -41,20 +40,15 @@ export default function PostTextAreaEditor({ onWrite, content }) {
             "code",
             "help",
             "wordcount",
-            "directionality",
           ],
-          content_langs: [
-            { title: "English", code: "en" },
-            { title: "Arabic", code: "ar" },
-          ],
+          directionality: "auto",
           toolbar:
-            "ltr rlf" +
             "undo redo | blocks | " +
             "bold italic forecolor | alignleft aligncenter " +
             "alignright alignjustify | bullist numlist outdent indent | " +
             "removeformat | help",
           content_style:
-            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px;background-color:#0f172a;color:#e5e7eb; direction:auto; }",
+            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px;background-color:#0f172a;color:#e5e7eb; }",
         }}
       />
     </>
