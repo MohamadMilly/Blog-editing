@@ -15,8 +15,7 @@ export default function PostTextAreaEditor({ onWrite, content }) {
       <Editor
         apiKey={TINYMCE_API_KEY}
         onInit={(_evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>Write the content here ...</p>"
-        value={content}
+        value={content || "<p>Write the content here ...</p>"}
         onEditorChange={log}
         init={{
           height: 500,

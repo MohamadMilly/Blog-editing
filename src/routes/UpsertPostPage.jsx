@@ -1,58 +1,57 @@
 import { useState } from "react";
 import PostTextAreaEditor from "../components/newPostPageComponents/PostTextAreaEditor";
 import { CategoriesSelectList } from "../components/newPostPageComponents/CategoriesSelect";
-import { useAuth } from "../contexts/authContext";
-import { useNavigate } from "react-router";
-import { useMyPosts } from "../contexts/myPostsContext";
 import { FeaturedImageField } from "../components/newPostPageComponents/FeaturedImageField";
+import { useUpSertPost } from "../hooks/useUpsertPost";
+import { useLoaderData } from "react-router";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export function NewPostPage() {
-  const [content, setContent] = useState("");
-  const [title, setTitle] = useState("");
-  const [manualSlug, setManualSlug] = useState("");
-  const [hasSetTheSlugManually, setHasSetTheSlugManually] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [featuredImageURL, setFeaturedImageURL] = useState(null);
-  const { setPosts } = useMyPosts();
-  const [step, setStep] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const { token } = useAuth();
-
-  const handlePost = async (published) => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const response = await fetch(`${API_URL}/posts`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: title,
-          content: content,
-          published: published,
-          slug: slug,
-          categories: categories?.map((category) => category.title) || [],
-          featuredImageURL: featuredImageURL || null,
-        }),
-      });
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.message || "Failed to post.");
-      }
-      setPosts((prev) => [result.post, ...prev]);
-      navigate("/dashboard");
-    } catch (err) {
-      setError(err.message);
-      console.error(error);
-    } finally {
-      setIsLoading(false);
+export async function loader({ params }) {
+  const { slug } = params;
+  if (!slug) return {};
+  try {
+    const response = await fetch(`${API_URL}/posts/${slug}`);
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.message || "Failed getting the post");
     }
+    return result.post;
+  } catch (err) {
+    console.error(err.message);
+  }
+}
+
+export function UpsertPostPage({ mode }) {
+  const post = useLoaderData();
+  const [content, setContent] = useState(post.content || "");
+  const [title, setTitle] = useState(post.title || "");
+  const [manualSlug, setManualSlug] = useState(post.slug || "");
+  const [hasSetTheSlugManually, setHasSetTheSlugManually] = useState(false);
+  const [categories, setCategories] = useState(post.categories || []);
+  const [featuredImageURL, setFeaturedImageURL] = useState(
+    post.featuredImageURL || null
+  );
+  const { addPost, addLoading, updatePost, updateLoading } = useUpSertPost();
+  const [step, setStep] = useState(1);
+  const slug =
+    manualSlug || hasSetTheSlugManually
+      ? manualSlug
+      : title
+          .toLowerCase()
+          .replaceAll(/\s+/g, "-")
+          .replaceAll(/[^a-z0-9\-]/g, "");
+  const handleUpsert = async (published) => {
+    const data = {
+      title,
+      slug,
+      categories,
+      content,
+      featuredImageURL,
+    };
+    if (mode === "adding") await addPost(published, data);
+    else if (mode === "editing")
+      await updatePost(post.id, post.slug, published, data);
   };
 
   const goNext = () => {
@@ -66,13 +65,7 @@ export function NewPostPage() {
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
-  const slug =
-    manualSlug || hasSetTheSlugManually
-      ? manualSlug
-      : title
-          .toLowerCase()
-          .replaceAll(/\s+/g, "-")
-          .replaceAll(/[^a-z0-9\-]/g, "");
+
   return (
     <main className="w-full px-4 sm:px-12 py-4 my-6 max-w-250 mx-auto text-gray-200 transition-all duration-300">
       {step === 1 && (
@@ -128,15 +121,15 @@ export function NewPostPage() {
             <div className="flex justify-center items-center gap-x-2 flex-wrap my-4">
               <button
                 className="px-4 py-2 text-sm bg-white text-pink-700 rounded cursor-pointer hover:bg-gray-200"
-                disabled={isLoading}
-                onClick={() => handlePost(true)}
+                disabled={addLoading}
+                onClick={() => handleUpsert(true)}
               >
                 Post and published
               </button>
               <button
                 className="px-4 py-2 text-sm bg-pink-700 text-white cursor-pointer rounded hover:bg-pink-600"
-                disabled={isLoading}
-                onClick={() => handlePost(false)}
+                disabled={addLoading}
+                onClick={() => handleUpsert(false)}
               >
                 Keep in draft
               </button>

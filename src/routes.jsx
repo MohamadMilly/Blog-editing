@@ -1,6 +1,6 @@
 import App from "./App";
 import { AuthenticatingPage } from "./routes/AuthenticatingPage";
-import { NewPostPage } from "./routes/NewPostPage";
+import { loader as postLoader, UpsertPostPage } from "./routes/UpsertPostPage";
 import { PostsDashboard } from "./routes/PostsDashboard";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { UnAuthorizedPage } from "./routes/UnAuthorizedPage";
@@ -23,7 +23,13 @@ const routes = [
       },
       {
         path: "/dashboard/posts/new",
-        element: <NewPostPage />,
+        element: <UpsertPostPage mode="adding" />,
+        loader: postLoader,
+      },
+      {
+        path: "/dashboard/posts/:slug/edit",
+        element: <UpsertPostPage mode="editing" />,
+        loader: postLoader,
       },
     ],
   },
