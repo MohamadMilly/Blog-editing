@@ -143,7 +143,7 @@ export function UpsertPostPage({ mode }) {
                 onClick={() => handleUpsert(true)}
               >
                 <span>Post as published</span>
-                {((status === "public" && addLoading) || updateLoading) && (
+                {status === "public" && (addLoading || updateLoading) && (
                   <Spinner size="sm" />
                 )}
               </button>
@@ -153,7 +153,7 @@ export function UpsertPostPage({ mode }) {
                 onClick={() => handleUpsert(false)}
               >
                 Keep in draft
-                {((status === "private" && addLoading) || updateLoading) && (
+                {status === "private" && (addLoading || updateLoading) && (
                   <Spinner size="sm" color="white" />
                 )}
               </button>
