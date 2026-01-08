@@ -15,7 +15,7 @@ export default function PostTextAreaEditor({ onWrite, content }) {
       <Editor
         apiKey={TINYMCE_API_KEY}
         onInit={(_evt, editor) => (editorRef.current = editor)}
-        value={content || "<p>Write the content here ...</p>"}
+        value={content}
         onEditorChange={log}
         init={{
           height: 500,
@@ -47,7 +47,7 @@ export default function PostTextAreaEditor({ onWrite, content }) {
             "alignright alignjustify | bullist numlist outdent indent | " +
             "removeformat | help",
           content_style:
-            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px;background-color:#0f172a;color:#e5e7eb; }",
+            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px;background-color:#0f172a;color:#e5e7eb;  }",
         }}
       />
     </>

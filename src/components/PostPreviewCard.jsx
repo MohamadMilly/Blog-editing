@@ -18,7 +18,7 @@ export function PostPreviewCard({
   const updatedAtDateString = timeAgo(updatedAtDate);
   const createdAtDateString = timeAgo(createdAtDate);
   return (
-    <article className="relative flex flex-wrap rounded-2xl min-37.5 overflow-hidden bg-slate-900/70 backdrop-blur-2xl">
+    <article className="relative flex flex-wrap rounded-2xl min-37.5 overflow-hidden bg-slate-900/70 backdrop-blur-2xl z-0">
       <div className="w-full h-60 sm:w-37.5 sm:h-37.5 shrink-0 flex justify-center items-center bg-gray-800/10">
         {featuredImageURL ? (
           <img

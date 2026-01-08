@@ -1,6 +1,6 @@
 import { useCategories } from "../../contexts/categoriesContext";
 import { NewCategoryForm } from "./NewCategoryForm";
-
+import { Shapes } from "lucide-react";
 export function CategoriesSelectList({
   selectedCategories,
   setSelectedCategories,
@@ -25,8 +25,11 @@ export function CategoriesSelectList({
     return <p>Loading...</p>;
   }
   return (
-    <div className="mx-auto max-w-120 bg-gray-900/10 p-4 rounded">
-      <h3 className="text-md mb-2">Select post's categories</h3>
+    <section className="mx-auto max-w-120 bg-gray-900/10 p-4 rounded ">
+      <h3 className="flex items-center gap-x-2 text-md text-sm mb-4">
+        <Shapes size={20} />
+        <span>Select post's categories</span>
+      </h3>
       <ul className="flex flex-col gap-1">
         {categories.length > 0 ? (
           categories.map((category) => {
@@ -52,6 +55,6 @@ export function CategoriesSelectList({
         )}
       </ul>
       <NewCategoryForm />
-    </div>
+    </section>
   );
 }

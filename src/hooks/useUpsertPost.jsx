@@ -10,7 +10,7 @@ export function useUpSertPost() {
   const [addError, setAddError] = useState(null);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [updateError, setUpdateError] = useState(null);
-
+  const [status, setStatus] = useState(null);
   const { setPosts } = useMyPosts();
   const { token } = useAuth();
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ export function useUpSertPost() {
     published,
     { title, slug, categories, content, featuredImageURL }
   ) => {
+    setStatus(published ? "public" : "private");
     try {
       setAddLoading(true);
       setAddError(null);
@@ -55,6 +56,7 @@ export function useUpSertPost() {
     published,
     { title, slug, categories, content, featuredImageURL }
   ) => {
+    setStatus(published ? "public" : "private");
     try {
       setUpdateLoading(true);
       setUpdateError(null);
@@ -102,5 +104,6 @@ export function useUpSertPost() {
     updateError,
     addPost,
     updatePost,
+    status,
   };
 }

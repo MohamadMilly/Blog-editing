@@ -23,12 +23,12 @@ const routes = [
       },
       {
         path: "/dashboard/posts/new",
-        element: <UpsertPostPage mode="adding" />,
+        element: <UpsertPostPage mode="adding" key="adding" />,
         loader: postLoader,
       },
       {
         path: "/dashboard/posts/:slug/edit",
-        element: <UpsertPostPage mode="editing" />,
+        element: <UpsertPostPage mode="editing" key="editing" />,
         loader: postLoader,
       },
     ],

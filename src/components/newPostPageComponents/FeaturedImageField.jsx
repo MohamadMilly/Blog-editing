@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Image } from "lucide-react";
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -45,13 +45,15 @@ export function FeaturedImageField({ setFeaturedImageURL, featuredImageURL }) {
   };
 
   return (
-    <section className="flex flex-col mx-auto gap-2 max-w-120 mb-4">
+    <section className="flex flex-col mx-auto gap-2 max-w-120 mb-4 border-b border-gray-400 pb-4">
       <form onSubmit={handleSubmit} method="POST">
         <label
-          className="text-lg text-gray-200 mb-4 block"
+          className="text-sm text-gray-200 mb-4 flex items-center gap-x-2"
           htmlFor="featureImageInput"
         >
-          Featured image
+          {" "}
+          <Image size={20} />
+          <span>Featured image</span>
         </label>
         <input
           id="featureImageInput"

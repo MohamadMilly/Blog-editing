@@ -9,7 +9,6 @@ import { NavLink } from "react-router";
 import { useUser } from "../contexts/userContext";
 import { Toolbar } from "./Toolbar";
 import { PostsControl } from "./PostsControl";
-import { LogoutButton } from "./LogoutButton";
 import { SettingsSection } from "./Settings";
 export function Navbar() {
   const { user } = useUser();
@@ -28,7 +27,7 @@ export function Navbar() {
   };
   return (
     <>
-      <nav className="sticky top-0 right-0 left-0 px-4 py-1.5 flex justify-between items-center bg-gray-800/30 text-white backdrop-blur-2xl border-b-2 border-b-gray-700/20">
+      <nav className="sticky top-0 right-0 left-0 px-4 py-1.5 flex justify-between items-center bg-gray-800/30 text-white backdrop-blur-2xl border-b-2 border-b-gray-700/20 z-20">
         <div className="md:flex items-center gap-x-4 hidden">
           <NavLink
             to="https://blog-consumption.vercel.app/"

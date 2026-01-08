@@ -7,12 +7,12 @@ export function PostsDashboard() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <main className="w-full px-4 sm:px-12 py-4 my-6 max-w-190 mx-auto text-gray-200 transition-all duration-300">
+    <main className="w-full px-4 sm:px-12 py-4 my-6 max-w-190 mx-auto text-gray-200 transition-all duration-300 z-0">
       <SearchBar />
       {isLoading ? (
         <LoadingPosts />
       ) : (
-        <section className="flex flex-col gap-2">
+        <section className="flex flex-col gap-2 z-0">
           {visiblePosts && visiblePosts.length !== 0 ? (
             visiblePosts.map((post) => {
               return (

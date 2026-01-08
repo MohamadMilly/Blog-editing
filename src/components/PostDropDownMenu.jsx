@@ -3,9 +3,12 @@ import { Ellipsis, X } from "lucide-react";
 import { EventButton } from "./EventButton";
 import { Pen } from "lucide-react";
 import { DeletePostButton } from "./DeletePostButton";
-import { Link } from "react-router";
+import { Link, useNavigation } from "react-router";
+import Spinner from "./Spinner";
 export function PostDropDownMenu({ slug, className }) {
   const [isOpen, setIsOpen] = useState(false);
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "loading";
   return (
     <div className={`relative ${className}`}>
       <EventButton
@@ -24,6 +27,7 @@ export function PostDropDownMenu({ slug, className }) {
           >
             <Pen size={15} />
             <span>Edit</span>
+            {isLoading && <Spinner size="sm" />}
           </Link>
           <DeletePostButton slug={slug} />
         </div>
