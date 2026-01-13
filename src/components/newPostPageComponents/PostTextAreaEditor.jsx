@@ -39,13 +39,15 @@ export default function PostTextAreaEditor({ onWrite, content }) {
             "code",
             "help",
             "wordcount",
+            "codesample",
           ],
           directionality: "auto",
           toolbar:
             "undo redo | blocks | " +
             "bold italic forecolor | alignleft aligncenter " +
             "alignright alignjustify | bullist numlist outdent indent | " +
-            "removeformat | help",
+            "removeformat | help | " +
+            "code codesample",
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px;background-color:#0f172a;color:#e5e7eb;  }",
         }}
